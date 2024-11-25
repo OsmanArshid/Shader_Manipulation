@@ -1,14 +1,14 @@
 # **Dissolve Shader Effect**
 
-This project demonstrates a **Dissolve Shader Effect** implemented in Unity. The shader dynamically dissolves a 3D object (a sphere) using noise and allows for customizable edge glow and colors.
+This project demonstrates a **Dissolve Shader Effect** implemented in Unity. The shader dynamically dissolves a 3D object (a sphere) using noise, allowing for customizable very slight edge glow and colors.
 
 ## **Features**
 - A slider for float `[0.0f, 1.0f]` that controls the dissolve percentage:
   - `0.0f` = Fully visible sphere with no glowing edge.
-  - `1.0f` = Sphere entirely dissolved (transparent), with glowing edges at intermediate stages.
+  - `1.0f` = sphere entirely dissolved (transparent).
 - A color picker for edge color customization.
 - Inspector Adjustable dissolve duration (default is 1 second).
-- Slight Edge glow integrated into the shader, controlled via the Unity Shader Graph.
+- Slight edge glow is integrated into the shader and controlled via the Unity Shader Graph.
 - **Event-driven Dissolve Trigger**: Dissolve process starts only when the user presses the **Spacebar**.
 
 ---
@@ -17,7 +17,6 @@ This project demonstrates a **Dissolve Shader Effect** implemented in Unity. The
 The project includes:
 1. A **Shader Graph** implementation for the dissolve effect:
    - Noise-based transitions for the dissolve-boundary.
-   - Smooth edge glow controlled via emission.
 2. A **C# script** (`DissolveController`) for:
    - Triggering the dissolve animation.
    - Updating shader properties dynamically (dissolve amount, edge color).
