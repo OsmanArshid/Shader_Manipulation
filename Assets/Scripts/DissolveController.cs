@@ -5,52 +5,53 @@ using System.Collections;
 public class DissolveController : MonoBehaviour
 {
     [Header("Dissolve Properties")]
-    [SerializeField, Range(0f, 1f)] private float dissolvePercentage = 0f; // Slider for dissolve percentage
-    [SerializeField] private Color edgeColor = Color.red; // Color picker for edge color
+    [SerializeField, Range(0f, 1f)] private float dissolvePercentage = 0f; // slider for dissolve percentage
+    [SerializeField] private Color edgeColor = Color.red; // da color picker for edge color of sphere
 
-    [Header("Dissolve Animation Settings")]
-    [SerializeField] private float dissolveTime = 1f; // Time to fully dissolve (default: 1 second)
-    private Material dissolveMaterial; // Reference to the dissolve shader material
+
+    [Header("Dissolve Animation Settings")] // so u can find easily 
+    [SerializeField] private float dissolveTime = 1f; // time it will take to fully dissolve 
+    private Material dissolveMaterial; // da dissolve shader material
+
 
     private void Start()
     {
-        // Fetch the material applied to the sphere
-        Renderer renderer = GetComponent<Renderer>();
+
+        Renderer renderer = GetComponent<Renderer>(); // fetching the render applied on da sphere
         if (renderer == null)
         {
-            Debug.LogError("No Renderer found on the GameObject!");
+            Debug.LogError("No Renderer found");
             return;
         }
 
         dissolveMaterial = renderer.material;
         if (dissolveMaterial == null)
         {
-            Debug.LogError("No material found on the Renderer!");
+            Debug.LogError("No material found");
             return;
         }
 
-        // Set initial shader values
-        UpdateDissolveProperties();
+
+        UpdateDissolveProperties(); // da initial shader values
     }
 
     private void Update()
     {
-        // Dynamically update shader properties from exposed variables
-        UpdateDissolveProperties();
 
-        // Example Input: Trigger dissolve using the Space key
+        UpdateDissolveProperties(); // the updating for the inspector variables
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(DissolveSphereOverTime());
+            StartCoroutine(DissolveSphereOverTime()); // starting the dissolving
         }
     }
 
     private void UpdateDissolveProperties()
     {
-        // Update dissolve percentage in the shader
+        // updating da dissolve percentage in da shader
         dissolveMaterial.SetFloat("_DissolveAmount", dissolvePercentage);
 
-        // Update edge color in the shader
+        // updating edge color in da shader
         dissolveMaterial.SetColor("_EdgeColor", edgeColor);
     }
 
@@ -67,10 +68,11 @@ public class DissolveController : MonoBehaviour
             yield return null;
         }
 
-        // Ensure the sphere is fully dissolved
-        dissolveMaterial.SetFloat("_DissolveAmount", 1f);
+        dissolveMaterial.SetFloat("_DissolveAmount", 1f);  // ensuring the sphere is fully dissolved
+
 
         // Destroy the GameObject
         Destroy(gameObject);
     }
 }
+
